@@ -1,6 +1,8 @@
 # https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 
 class Solution:
+    # Time: O(n)
+    # Space: O(1)
     def maxProfit(self, prices):
         """
         :type prices: List[int]
@@ -18,6 +20,8 @@ class Solution:
             maxProfit = max(profit, maxProfit)
         return maxProfit
 
+    # Time: O(n^2)
+    # Space: O(1)
     # Time complexity is too high at O(n^2)
     def maxProfitBrute(self, prices):
         pLen = len(prices)
