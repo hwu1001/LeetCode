@@ -9,7 +9,9 @@ class TreeNode:
 
 class Solution:
     # Time: O(n)
-    # Space: O(n) - stored in the stack execution
+    # Space: O(h) - where h is the height of the tree, 
+    #               stored in the stack execution
+    # Recursive solution
     def sortedArrayToBST(self, nums):
         """
         :type nums: List[int]
@@ -28,6 +30,7 @@ class Solution:
     # Time: O(n)
     # Space: O(n) - Really it's 3*n, since we store each node along
     #               with each right/left index
+    # Iterative solution using stacks
     def sortedArrayToBST2(self, nums):
         """
         :type nums: List[int]

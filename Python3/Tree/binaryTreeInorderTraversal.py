@@ -10,6 +10,7 @@ from treeVisualizer import deserialize
 class Solution:
     # Time: O(n)
     # Space: O(h) - where h is the height of the tree
+    # Iterative solution using visitation flags with a stack
     def inorderTraversal(self, root):
         """
         :type root: TreeNode
@@ -44,9 +45,9 @@ class Solution:
                 treeData.append(node.val)
         return treeData
 
-    # Definitely a better answer than the one provided above
     # Time: O(n)
     # Space: O(h) - where h is the height of the tree
+    # Iterative solution with a stack
     def inorderTraversal2(self, root):
         """
         :type root: TreeNode
@@ -64,8 +65,8 @@ class Solution:
             node = node.right
         return treeData
     
-    # Time: O(1)
-    # Space: O(n)
+    # Time: O(n)
+    # Space: O(1)
     def inorderMorrisTraversal(self, root):
         curNode = root
         treeData = []

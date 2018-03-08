@@ -9,6 +9,10 @@
 from treeVisualizer import deserialize
 
 class Solution:
+    # Time: O(n)
+    # Space: O(h) - where h is the height of the tree, stored
+    #               in the stack execution
+    # Recursive solution
     def preorderTraversal(self, root):
         """
         :type root: TreeNode
@@ -24,7 +28,9 @@ class Solution:
             self._preorderTraversal(treeNode.left, treeData)
             self._preorderTraversal(treeNode.right, treeData)
 
-    # Only append right nodes to the stack
+    # Time: O(n)
+    # Space: O(h) - where h is the height of the right nodes
+    # Iterative solution with only appending right nodes to the stack
     def preorderTraversal2(self, root):
         if not root:
             return []
@@ -40,7 +46,9 @@ class Solution:
                 node = rightNodes.pop()
         return treeData
     
-    # Try to append all nodes to the stack
+    # Time: O(n)
+    # Space: O(h) - where h is the height of the tree
+    # Iterative solution appending all nodes of the tree
     def preorderTraversal3(self, root):
         treeData = []
         stack = [root]
@@ -54,6 +62,10 @@ class Solution:
                     stack.append(node.left)
         return treeData
     
+    # Time: O(n)
+    # Space: O(1)
+    # Morris traversal
+    # https://en.wikipedia.org/wiki/Threaded_binary_tree
     def preorderMorrisTraversal(self, root):
         curNode = root
         treeData = []
