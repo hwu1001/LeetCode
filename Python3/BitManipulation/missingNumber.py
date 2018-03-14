@@ -1,5 +1,10 @@
 # https://leetcode.com/problems/missing-number/description/
+
 class Solution:
+
+    # Time: O(n)
+    # Space: O(1)
+    # Explicit summation
     def missingNumber(self, nums):
         """
         :type nums: List[int]
@@ -17,12 +22,19 @@ class Solution:
         expectedSum += i + 1
         return expectedSum - numsSum
 
+    # Time: O(n)
+    # Space: O(1)
+    # Bit manipulation solution
     def missingNumberXor(self, nums):
         missing = len(nums)
         for i, num in enumerate(nums):
             missing ^= i ^ num
         return missing
 
+    # Time: O(n)
+    # Space: O(1)
+    # Solution using Gauss' formula
+    # https://brilliant.org/wiki/sum-of-n-n2-or-n3/
     def missingNumberGauss(self, nums):
         numLen = len(nums)
         expectedSum = (numLen * (numLen + 1)) // 2
