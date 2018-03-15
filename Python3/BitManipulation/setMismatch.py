@@ -3,26 +3,44 @@
 # Note that even though this problem is sort of similar to "Find the Duplicate Number"
 # the strategies of binary search and the tortoise and the hare algorithms won't work
 # in the same way since we have 1 to n integers with n elements. By not having n + 1
-# elements the array requires further manipulation before those algorithms could be employed.break
+# elements the array requires further manipulation before those algorithms could be employed.
 
 # An example of why, say, binary search won't work immediately for something like:
 # nums = [1,3,3,4,5]
 # The mid-point 3 has 3 elements less than or equal to it, just like [1,2,3,4,5], so it becomes
 # ambiguous which way to move our mid-point. If it was instead [1,2,3,4,5,3] there would be
 # an indication that the duplicate is in the range 1 to mid-point since there are 4 elements less
-# than or equal to 3.
+# than or equal to 3. For the tortoise and the hare, the problem input won't always produce a cycle so
+# so you can't reliably get the duplicate value. Both of these algorithms would also work with
+# using the summation of the input array too, which is problematic in compiled languages that have the
+# possibility of overflow.
 
 class Solution:
+    # Time: O(n)
+    # Space: O(1)
+    # Bit manipulation using XOR solution
     def findErrorNums(self, nums):
         """
         :type nums: List[int]
         :rtype: List[int]
         """
         xor = 0
+        # Find a number where the bits with 1 match the position of our numbers and the bits with 0
+        # match the position of the other number
         for i in range(1, len(nums) + 1):
             xor ^= i ^ nums[i - 1]
-        differBit = xor & (~(xor - 1))
+        # Isolate the rightmost 1-bit
+        # (E.g. if our number is 20 -> bin(20) == "0b10100" so we get 4 -> bin(4) == "0b100")
+        # http://www.catonmat.net/blog/low-level-bit-hacks-you-absolutely-must-know/#bithack7
+        # Could also be written as xor & ~(xor - 1)
+        differBit = xor & (-xor)
         missingOrDup = 0
+        # In this loop we're dividing the numbers in nums into two groups:
+        # Group 1: Has elements that have a 1 bit at the rightmost position
+        # Group 2: Has elements that have a 0 bit at the rightmost position
+        # We could have the missingOrDup variable be two variables to represent the groups above
+        # but since we have the xor variable from before we don't have to and just have to xor
+        # at the end
         for i in range(1, len(nums) + 1):
             if i & differBit:
                 missingOrDup ^= i
@@ -59,7 +77,7 @@ class Solution:
         return [dup, missing]
 
     # Time: O(n)
-    # Space: O(n)
+    # Space: O(n) - Because we create a set of nums
     # Summation solution
     # This solution is generally not favored in compiled languages since it's prone
     # to overflow errors
