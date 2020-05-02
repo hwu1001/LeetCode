@@ -42,6 +42,9 @@ class Solution2:
 
 if __name__ == '__main__':
     obj = Solution2()
+    # The shifts are first element moving left (0) or right (1)
+    # Second element is distance of shift
+    # e.g. [0, 1] shift to the left one spaces or [1, 2] is shift right 2 spaces
     assert(obj.stringShift('abc', [[0,1],[1,2]]) == 'cab')
     assert(obj.stringShift('abcdefg', [[1,1],[1,1],[0,2],[1,3]]) == 'efgabcd')
     assert(obj.stringShift('yisxjwry', [[1,8],[1,4],[1,3],[1,6],[0,6],[1,4],[0,2],[0,1]]) == 'yisxjwry')
