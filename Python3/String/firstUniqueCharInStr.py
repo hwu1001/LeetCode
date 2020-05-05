@@ -48,6 +48,22 @@ class Solution:
         else:
             return min(uniqs)
 
+class Solution2:
+    # Did this problem again for a challenge in May 2020, seemed simpler than the original answer I used
+    # Time: O(n) - Two passes over string s
+    # Space: O(1) - Only ever 26 characters plus a count, assuming a fixed integer for the number of characters
+    def firstUniqChar(self, s: str) -> int:
+        m  = {}
+        for c in s:
+            if c in m:
+                m[c] += 1
+            else:
+                m[c] = 1
+        for i, c in enumerate(s):
+            if m[c] == 1:
+                return i
+        return -1
+
 if __name__ == "__main__":
     obj = Solution()
     # test = obj.firstUniqChar2("loveleetcode")
